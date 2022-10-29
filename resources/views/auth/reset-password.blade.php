@@ -1,11 +1,12 @@
 @extends('layouts.auth')
 @section('title', 'Восстановление пароля')
 @section('content')
-    <x-forms.auth-forms title="Восстановление пароля" action="">
+    <x-forms.auth-forms title="Восстановление пароля" action="" method="POST">
         @csrf
         <x-forms.text-input
             name="email"
             type="email"
+            value="{{ old('email') }}"
             placeholder="Email"
             required="true"
             :isError="$errors->has('email')"

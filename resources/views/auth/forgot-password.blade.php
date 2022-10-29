@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 @section('title', 'Забыли пароль')
 @section('content')
-    <x-forms.auth-forms title="Забыли пароль" action="">
+    <x-forms.auth-forms title="Забыли пароль" action="" method="POST">
         @csrf
         <x-forms.text-input
             name="email"

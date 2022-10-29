@@ -1,11 +1,12 @@
 @extends('layouts.auth')
 @section('title', 'Вход в аккаунт')
 @section('content')
-    <x-forms.auth-forms title="Вход в аккаунт" action="">
+    <x-forms.auth-forms title="Вход в аккаунт" action="{{ route('signIn') }}" method="POST">
         @csrf
         <x-forms.text-input
             name="email"
             type="email"
+            value="{{ old('email') }}"
             placeholder="Email"
             required="true"
             :isError="$errors->has('email')"

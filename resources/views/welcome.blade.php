@@ -16,7 +16,14 @@
                 <a href="{{ route('home') }}" rel="home">
                     <img src="{{ Vite::image('logo.svg') }}" class="w-[120px] xs:w-[148px] md:w-[201px] h-[30px] xs:h-[36px] md:h-[50px]" alt="CutCode">
                 </a>
-            </div><!-- /.header-logo -->
+            </div>
+            @auth
+                <form action="{{ route('logOut') }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Выйти</button>
+                </form>
+            @endauth
         </div><!-- /.header-inner -->
     </div><!-- /.container -->
 </header>
