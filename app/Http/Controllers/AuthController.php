@@ -11,6 +11,7 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Password;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -110,5 +111,28 @@ class AuthController extends Controller
             ? redirect()->route('login')->with('message', __($status))
             : back()->withErrors(['email' => [__($status)]]);
 
+    }
+
+    public function github()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+
+    public function githubCallback()
+    {
+        $githubUser = Socialite::driver('github')->user();
+
+        $user = User::query()->updateOrCreate([
+             'github_id' => $githubUser->id,
+        ],
+         [
+             'name'     => $githubUser->name,
+             'email'    => $githubUser->email,
+             'password' => bcrypt(1234567890)
+         ]);
+
+        auth()->login($user);
+
+        return redirect()->intended(route('home'));
     }
 }
