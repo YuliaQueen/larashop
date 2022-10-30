@@ -16,4 +16,5 @@ yarn-error.log
 /.vscode
 /stubs/
 /tests/Fixtures/images/products/
+/tests/Fixtures/images/brands/
 /.vagrant/

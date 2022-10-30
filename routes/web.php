@@ -9,13 +9,14 @@ Route::controller(AuthController::class)->group(function () {
         ->name('login');
 
     Route::post('/login', 'signIn')
+        ->middleware('throttle:auth')
         ->name('signIn');
 
     Route::get('/sign-up', 'signUp')
         ->name('sign-up');
     Route::post('/sign-up', 'store')
+        ->middleware('throttle:auth')
         ->name('store');
-
 
     Route::delete('/logout', 'logOut')
         ->name('logOut');
